@@ -16,7 +16,7 @@ var input = [];
 
 main.on('click', 'up', function(e) {
 
-if (auth.length === 6)
+if (input.length === 6)
   {checkauthentication(auth,input);} 
   else {input.push(0);}
 
@@ -39,7 +39,7 @@ main.on('click', 'select', function(e) {
 
 main.on('click', 'down', function(e) {
   
-  if (auth.length === 6)
+  if (input.length === 6)
   {checkauthentication(auth,input);}
   else {input.push(1);}
   
@@ -52,7 +52,7 @@ main.on('click', 'down', function(e) {
         return false;
 
     // compare lengths - can save a lot of time 
-    if (auth.length === input.length)
+    if (auth.size === input.length)
     return true;
  
  if (true)
@@ -61,7 +61,7 @@ main.on('click', 'down', function(e) {
     position: new Vector2(0, 50),
     size: new Vector2(144, 30),
     font: 'gothic-24-bold',
-    text: 'HandKey Directions',
+    text: 'Success!',
     textAlign: 'center'
   });
   wind.add(textfield);
