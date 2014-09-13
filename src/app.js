@@ -1,25 +1,23 @@
 var UI = require('ui');
 var Vector2 = require('vector2');
-var input;
 
-{var main = new UI.Card({
+var main = new UI.Card({
   title: 'HandKey',
   icon: 'images/menu_icon.png',
   subtitle: 'Enter Password',
-            body: 'Press Up/Down'
-}); var input = [];}
+  body: 'Press Up/Down'
+});
 
 main.show();
 
-var auth = new Array (0, 1, 0, 1, 0, 1);
-      
-
+var auth = [0,0,0,0,0];      
+var input = [];
 
 main.on('click', 'up', function(e) {
-
-if (input.length === 6)
+ {input.push(0);}
+ if (input.length === 5)
   {checkauthentication(auth,input);} 
-  else {input.push(0);}
+
 
 });
 
@@ -39,10 +37,10 @@ main.on('click', 'select', function(e) {
 });
 
 main.on('click', 'down', function(e) {
-  
+   {input.push(1);}
   if (input.length === 5)
   {checkauthentication(auth,input);}
-  else {input.push(1);}
+ 
   
 });
 
@@ -53,11 +51,8 @@ main.on('click', 'down', function(e) {
         return false;
 
     // compare lengths - can save a lot of time 
-    if (auth.size !== input.length)
-    return false;
- 
-if ((auth-input) === [0,0,0,0,0,0])
-  return true;
+    if (auth.size === input.length)
+    return true;
  
  if (true)
  {var wind = new UI.Window();
