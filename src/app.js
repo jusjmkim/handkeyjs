@@ -10,14 +10,15 @@ var main = new UI.Card({
 
 main.show();
 
-var auth = [0,0,0,0,0];      
+var auth = [0, 1, 0, 1, 0, 1];
+      
 var input = [];
 
 main.on('click', 'up', function(e) {
- {input.push(0);}
- if (input.length === 5)
-  {checkauthentication(auth,input);} 
 
+if (auth.length === 6)
+  {checkauthentication(auth,input);} 
+  else {input.push(0);}
 
 });
 
@@ -37,13 +38,12 @@ main.on('click', 'select', function(e) {
 });
 
 main.on('click', 'down', function(e) {
-   {input.push(1);}
-  if (input.length === 5)
+  
+  if (auth.length === 6)
   {checkauthentication(auth,input);}
- 
+  else {input.push(1);}
   
 });
-
 
  function checkauthentication(a, b)
 
@@ -51,7 +51,7 @@ main.on('click', 'down', function(e) {
         return false;
 
     // compare lengths - can save a lot of time 
-    if (auth.size === input.length)
+    if (auth.length === input.length)
     return true;
  
  if (true)
@@ -60,7 +60,7 @@ main.on('click', 'down', function(e) {
     position: new Vector2(0, 50),
     size: new Vector2(144, 30),
     font: 'gothic-24-bold',
-    text: 'Success!',
+    text: 'HandKey Directions',
     textAlign: 'center'
   });
   wind.add(textfield);
