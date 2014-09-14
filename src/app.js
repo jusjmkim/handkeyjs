@@ -15,7 +15,10 @@ var auth = [0, 1, 0, 1, 0, 1];
 var input = [];
 
 main.on('click', 'up', function(e) {
-{input.push(0);}
+
+if (input.length >= 6)
+  {checkauthentication(auth,input);} 
+  else {input.push(0);}
 
 });
 
@@ -36,12 +39,12 @@ main.on('click', 'select', function(e) {
 
 main.on('click', 'down', function(e) {
   
-  {input.push(1);}
+  if (input.length >= 6)
+  {checkauthentication(auth,input);}
+  else {input.push(1);}
   
 });
 
-if (auth === input)
-  checkauthentication(auth,input);
 
  function checkauthentication(a, b)
 
@@ -51,7 +54,15 @@ if (auth === input)
     // compare lengths - can save a lot of time 
    // if (auth.size !== input.length)
     // return false;
+ var counter = true;
+ for (var i=0; i<auth.length; i++){
+   if ((auth[i] !== input[i])) {
+     counter = false;
+     break;
+   }
+ }
  
+ if (counter)
  {var wind = new UI.Window();
   var textfield = new UI.Text({
     position: new Vector2(0, 50),
