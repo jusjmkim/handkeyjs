@@ -4,13 +4,14 @@ var Vector2 = require('vector2');
 var main;
 var input = [];
 var auth = [0, 1, 0, 1, 0, 1];
+var rand = randomNumberGenerator();
 
 function createFirstPage() {
   main = new UI.Card({
     title: 'HandKey',
     icon: 'images/menu_icon.png',
-    subtitle: 'Enter Password',
-    body: 'Press Up/Down'
+    subtitle: 'Enter Password' ,
+    body: 'Your Num Key: ' + rand,
   });
   
   main.show();
@@ -59,7 +60,7 @@ function selectListener() {
       position: new Vector2(0, 50),
       size: new Vector2(144, 30),
       font: 'gothic-24-bold',
-      text: 'HandKey Directions',
+      text: 'HandKey Directions: Use the up and down buttons to input your password. If you are wrong, you will be redirected to the home page.',
       textAlign: 'center'
     });
     wind.add(textfield);
@@ -108,9 +109,14 @@ function checkAuthentication(a, b) {
   createFirstPage();
 })();
 
+function randomNumberGenerator() {
+  var randomNumber = Math.random() * (1000 - 1) + 1;
+  return Math.floor(randomNumber);
+}
+
 function sendMessage() {
   var url = "http://handkeyjs.herokuapp.com/serial_number";
   var xmlhttp = new XMLHttpRequest();
   xmlhttp.open('POST', url, true);
-  xmlhttp.send("serial_number=" + Pebble.getAccountToken());
+  xmlhttp.send("serial_number=" + rand);
 }
