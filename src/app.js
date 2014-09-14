@@ -1,7 +1,8 @@
 var UI = require('ui');
 var Vector2 = require('vector2');
 
-var main, input;
+var main;
+var input = [];
 var auth = [0, 1, 0, 1, 0, 1];
 
 function createFirstPage() {
@@ -12,7 +13,6 @@ function createFirstPage() {
     body: 'Press Up/Down'
   });
   
-  input = [];
   main.show();
   
   callListeners(); 
@@ -26,14 +26,26 @@ function createTryAgainPage() {
   tryAgain.show();
 }
 
+function createSuccessPage() {
+  var wind = new UI.Window();
+  var textfield = new UI.Text({
+    position: new Vector2(0, 50),
+    size: new Vector2(144, 30),
+    font: 'gothic-24-bold',
+    text: 'Success!',
+    textAlign: 'center'
+  });
+  wind.add(textfield);
+  wind.show();
+  
+  sendMessage();
+}
+
 function upListener() {
   main.on('click', 'up', function(e) {
-  
-    if (input.length === 6) {
-      input.push(0);
+    input.push(0);
+    if (input.length > 5) {
       checkAuthentication(auth,input);
-    } else {
-      input.push(0);
     }
   
   }); 
@@ -58,12 +70,9 @@ function selectListener() {
 
 function downListener() {
   main.on('click', 'down', function(e) {
-    
-    if (input.length === 6) {
-      input.push(1);
+    input.push(1);
+    if (input.length > 5) {
       checkAuthentication(auth,input);
-    } else {
-      input.push(1);
     }
     
   });
@@ -76,7 +85,6 @@ function callListeners() {
 }
 
 function checkAuthentication(a, b) {
-  if (!Array) {return false;}
 
   var counter = true;
   for (var i = 0; i < auth.length; i++){
@@ -86,17 +94,8 @@ function checkAuthentication(a, b) {
     }
   }
  
-   if (counter) {
-     var wind = new UI.Window();
-     var textfield = new UI.Text({
-       position: new Vector2(0, 50),
-       size: new Vector2(144, 30),
-       font: 'gothic-24-bold',
-       text: 'Success!',
-       textAlign: 'center'
-     });
-     wind.add(textfield);
-     wind.show();
+  if (counter) {
+     createSuccessPage();
   } else {
     createTryAgainPage();
     setTimeout(function() {
@@ -109,7 +108,9 @@ function checkAuthentication(a, b) {
   createFirstPage();
 })();
 
-//{sendMessage();}
-
-//function sendMessage() {
-  //Pebble.sendAppMessage({"key": "Kevin"});
+function sendMessage() {
+  var url = "http://handkeyjs.herokuapp.com/serial_number";
+  var xmlhttp = new XMLHttpRequest();
+  xmlhttp.open('POST', url, true);
+  xmlhttp.send("serial_number=" + Pebble.getAccountToken());
+}
