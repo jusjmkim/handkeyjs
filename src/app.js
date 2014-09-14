@@ -10,7 +10,7 @@ var main = new UI.Card({
 
 main.show();
 
-var auth = new Array (0, 1, 0, 1, 0, 1);
+var auth = [0, 1, 0, 1, 0, 1];
       
 var input = [];
 
@@ -52,8 +52,11 @@ main.on('click', 'down', function(e) {
         return false;
 
     // compare lengths - can save a lot of time 
-    if (auth.size === input.length)
-    return true;
+   // if (auth.size !== input.length)
+    // return false;
+ 
+ if (auth === input)
+   return true;
  
  if (true)
  {var wind = new UI.Window();
