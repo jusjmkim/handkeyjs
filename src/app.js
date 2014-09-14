@@ -16,7 +16,7 @@ var input = [];
 
 main.on('click', 'up', function(e) {
 
-if (input.length === 6)
+if (auth === input)
   {checkauthentication(auth,input);} 
   else {input.push(0);}
 
@@ -39,7 +39,7 @@ main.on('click', 'select', function(e) {
 
 main.on('click', 'down', function(e) {
   
-  if (input.length === 6)
+  if (auth === input)
   {checkauthentication(auth,input);}
   else {input.push(1);}
   
